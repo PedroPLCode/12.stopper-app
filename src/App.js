@@ -1,48 +1,46 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import Display from './components/Display/Display'
-import Button from './components/Button/Button'
-import Container from './components/Container/Container'
+import Container from './components/Container/Container';
+import Display from './components/Display/Display';
+import Button from './components/Button/Button';
 
 const App = () => {
   
-  const [time, setTime] = useState(0);
-  const [start, setStart] = useState(false);
+  const [miliseconds, setMiliseconds] = useState(0);
+  const [stoperActive, setStoperActive] = useState(false);
 
-  const startStoper = event => {
-    event.preventDefault();
-    setStart(true);
-    console.log('klik start stoper')
+  const startStoper = () => {
+    setStoperActive(true);
   }
 
-  const resetStoper = event => {
-    event.preventDefault();
-    setTime(0);
-    console.log('klik reset stoper')
+  const stopStoper = () => {
+    setStoperActive(false);
   }
 
-  const stopStoper = event => {
-    event.preventDefault();
-    setStart(false);
-    console.log('klik stop stoper')
+  const resetStoper = () => {
+    setMiliseconds(0);
   }
 
-  useEffect(() => {
-    if(start){
-        const timer = setInterval(()=>{
-            setTime(previousTime=>previousTime+1);
-        },1);
-        return () => clearInterval(timer);
+  useEffect( () => {
+    if(stoperActive) {
+      const timer = setInterval( () => {
+        setMiliseconds(miliseconds => miliseconds + 1);
+      },1);
+      return () => {
+        if(timer) {
+          clearInterval(timer);
+        }
+      };
     }
-},[start]);
+  }, [stoperActive]);
 
   return (
     <div>
       <Container>
-        <Display time={time} />
+        <Display miliseconds={miliseconds} />
         <Button action={startStoper}>START</Button>
-        <Button action={resetStoper}>RESET</Button>
         <Button action={stopStoper}>STOP</Button>
+        <Button action={resetStoper}>RESET</Button>
       </Container>
     </div>
   );

@@ -12,7 +12,7 @@ const Display = props => {
 
   return (
     <div className={styles.display}>
-      {msToTime(props.time)}
+      {msToTime(props.miliseconds)}
     </div>
   );
 }
