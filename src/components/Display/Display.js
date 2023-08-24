@@ -6,7 +6,7 @@ const Display = props => {
     let sec = Math.floor((ms / 1000 ) % 60);
     let min = Math.floor(((ms / 1000 ) / 60) % 60);
     let hour = Math.floor((ms / 1000 ) / 60 / 60);
-    let msec = Math.floor((ms - sec * 1000) );
+    let msec = Math.floor((ms % 1000) );
     return (`${hour} : ${min} : ${sec} : ${msec}`);
   }
 
