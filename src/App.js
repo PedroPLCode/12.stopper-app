@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Container from './components/Container/Container';
 import Display from './components/Display/Display';
 import Button from './components/Button/Button';
@@ -24,8 +23,8 @@ const App = () => {
   useEffect( () => {
     if(stoperActive) {
       const timer = setInterval( () => {
-        setMiliseconds(miliseconds => miliseconds + 3.5);
-      }, 1);
+        setMiliseconds(miliseconds => miliseconds + 10);
+      }, 10);
       return () => {
         if(timer) {
           clearInterval(timer);
